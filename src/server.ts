@@ -4,12 +4,14 @@ import helmet from 'helmet';
 import cors from 'cors';
 import config from '../config.json';
 import { getFilesWithKeyword } from './utils/getFilesWithKeyword';
+import {ConeccionDB} from './db/conexion.db';
 
 const app: Express = express();
 
 /************************************************************************************
  *                              Basic Express Middlewares
  ***********************************************************************************/
+ConeccionDB()
 
 app.set('json spaces', 4);
 app.use(express.json());
@@ -31,8 +33,11 @@ if (process.env.NODE_ENV === 'production' || config.NODE_ENV === 'production') {
  ***********************************************************************************/
 
 getFilesWithKeyword('router', __dirname + '/app').forEach((file: string) => {
+  const nameUltimeData = file.substr(file.trim().lastIndexOf("app/") + 4)
+  const palabra = nameUltimeData.split('/') 
+  console.log(palabra)
   const { router } = require(file);
-  app.use('/', router);
+  app.use(`/${palabra[0]}`, router);
 })
 /************************************************************************************
  *                               Express Error Handling
