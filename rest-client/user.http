@@ -1,0 +1,17 @@
+@local = http://localhost:8080
+
+POST {{local}}/user
+content-type: application/json
+{
+    "name": "example",
+    "email": "example@example.com" 
+    ,"password": "11223344"
+}
+
+###
+POST {{local}}/login
+content-type: application/json
+{
+    "email": "example@example.com",
+    "pass": "11223344"
+}
