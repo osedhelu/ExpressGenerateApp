@@ -1,15 +1,16 @@
 @local = http://localhost:8080
 
-GET {{local}}/task
+GET {{local}}/user
 ###
 
-POST {{local}}/task
+POST {{local}}/user
 content-type: application/json
 
 {
-    "name": "sample",
-    "task": "Wed, 21 Oct 2015 18:27:50 GMT:Warning: ",
-    "usuario": null
+    "name": "admin",
+    "email": "admin1@admin.com",
+    "pass1": "11223344",
+    "pass2": "11223344"
 }
 
 ###
@@ -24,5 +25,12 @@ content-type: application/json
     "task": "Wed, 21 Oct 2015 18:27:50 GMT:Warning: ",
     "usuario": null
 }
+###
 
+POST {{local}}/login
+content-type: application/json
 
+{
+    "email": "admin1@admin.com",
+    "password": "11223344"
+}

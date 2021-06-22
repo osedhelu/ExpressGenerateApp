@@ -1,30 +1,33 @@
-import express, { Express } from 'express';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import cors from 'cors';
-import config from '../config.json';
-import { getFilesWithKeyword } from './utils/getFilesWithKeyword';
-import {ConeccionDB} from './db/conexion.db';
+import express, { Express } from "express";
+import morgan from "morgan";
+import helmet from "helmet";
+import cors from "cors";
+import config from "../config.json";
+import { getFilesWithKeyword } from "./utils/getFilesWithKeyword";
+import { ConeccionDB } from "./db/conexion.db";
 
 const app: Express = express();
 
 /************************************************************************************
  *                              Basic Express Middlewares
  ***********************************************************************************/
-ConeccionDB()
+ConeccionDB();
 
-app.set('json spaces', 4);
+app.set("json spaces", 4);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Handle logs in console during development
-if (process.env.NODE_ENV === 'development' || config.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
+if (
+  process.env.NODE_ENV === "development" ||
+  config.NODE_ENV === "development"
+) {
+  app.use(morgan("dev"));
   app.use(cors());
 }
 
 // Handle security and origin in production
-if (process.env.NODE_ENV === 'production' || config.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production" || config.NODE_ENV === "production") {
   app.use(helmet());
 }
 
@@ -32,24 +35,31 @@ if (process.env.NODE_ENV === 'production' || config.NODE_ENV === 'production') {
  *                               Register all routes
  ***********************************************************************************/
 
-getFilesWithKeyword('router', __dirname + '/app').forEach((file: string) => {
-  const nameUltimeData = file.substr(file.trim().lastIndexOf("app/") + 4)
-  const palabra = nameUltimeData.split('/') 
-  console.log(palabra)
+getFilesWithKeyword("router", __dirname + "/app").forEach((file: string) => {
+  const nameUltimeData = file.substr(file.trim().lastIndexOf("app/") + 4);
+  const palabra = nameUltimeData.split("/");
+  console.log(palabra);
   const { router } = require(file);
   app.use(`/${palabra[0]}`, router);
-})
+});
 /************************************************************************************
  *                               Express Error Handling
  ***********************************************************************************/
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  return res.status(500).json({
-    errorName: err.name,
-    message: err.message,
-    stack: err.stack || 'no stack defined'
-  });
-});
+app.use(
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    return res.status(500).json({
+      errorName: err.name,
+      message: err.message,
+      stack: err.stack || "no stack defined",
+    });
+  }
+);
 
 export default app;
