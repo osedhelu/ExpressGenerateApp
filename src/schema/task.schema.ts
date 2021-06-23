@@ -1,12 +1,13 @@
 import { Schema, model } from "mongoose";
 // 1. Create an interface representing a document in MongoDB.
-interface Tasks {
+export interface Tasks {
   name: string;
-  desacription: string;
+  task: string;
 }
 const schema = new Schema<Tasks>({
   name: { type: String, required: true },
-  desacription: { type: String, required: true },
+  task: { type: String, required: true },
+  usuario: {type: Schema.Types.ObjectId, ref: "users"}
 });
 
-export const TaskSchema = model<Tasks>("Task", schema);
+export const TaskSchema = model<Tasks>("tasks", schema);

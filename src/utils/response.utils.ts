@@ -1,4 +1,4 @@
-import { MessageResponse } from "../app/interfaces/index.i";
+import { MessageResponse } from "../interfaces";
 
 export const r = {
   _400: (res: any, error: any) => {

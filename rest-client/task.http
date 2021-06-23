@@ -7,8 +7,9 @@ POST {{local}}/task
 content-type: application/json
 
 {
-    "name":  "string",
-    "desacription": "string",
+    "name": "sample",
+    "task": "Wed, 21 Oct 2015 18:27:50 GMT:Warning: ",
+    "usuario": null
 }
 
 ###
@@ -20,5 +21,8 @@ content-type: application/json
 
 {
     "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "task": "Wed, 21 Oct 2015 18:27:50 GMT:Warning: ",
+    "usuario": null
 }
+
+
