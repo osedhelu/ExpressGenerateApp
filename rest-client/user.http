@@ -2,16 +2,19 @@
 
 POST {{local}}/user
 content-type: application/json
+
 {
     "name": "example",
-    "email": "example@example.com" 
-    ,"password": "11223344"
+    "email": "example@example.com",
+    "pass1": "11223344",
+    "pass2": "11223344"
 }
 
 ###
 POST {{local}}/login
 content-type: application/json
+
 {
     "email": "example@example.com",
-    "pass": "11223344"
+    "password": "11223344"
 }
