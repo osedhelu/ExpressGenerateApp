@@ -1,16 +1,12 @@
-import {MessageResponse} from "../interfaces";
+import { MessageResponse } from "../interfaces";
 import { Tasks, TaskSchema } from "../schema/index.schema";
 
 export class taskController {
   async add(task: Tasks): Promise<MessageResponse> {
-    try {
-      return {
-        ok: true,
-        data: await TaskSchema.create(task),
-      };
-    } catch (err) {
-      return { ok: false, message: "hay un error al guardar el dato" };
-    }
+    return {
+      ok: true,
+      data: await TaskSchema.create(task),
+    };
   }
   async remove(id: any): Promise<MessageResponse> {
     try {
@@ -39,7 +35,5 @@ export class taskController {
       };
     }
   }
-  async edit(id: any) {
-
-  }
+  async edit(id: any) {}
 }

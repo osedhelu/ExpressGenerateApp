@@ -12,22 +12,25 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const task = req.body;
-  const data = await model.add(task);
-  r._200(res, { ok: true, data });
+  try {
+    const task = req.body;
+    console.log(task);
+    const data = await model.add(task);
+    r._200(res, data);
+  } catch (err) {
+    r._400(res, err);
+  }
 });
 
 router.put("/:id", (req, res) => {
   try {
     const id = req.params;
     const body = req.body;
-    r._200(res, {ok: true, data: body})
-  } catch(err) {
-    r._400(res, err)
-  } 
+    r._200(res, { ok: true, data: body });
+  } catch (err) {
+    r._400(res, err);
+  }
 });
-
-
 
 router.delete("/:id", (req, res) => {
   res.status(200).send({
