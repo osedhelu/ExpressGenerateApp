@@ -7,7 +7,7 @@ export interface Tasks {
 const schema = new Schema<Tasks>({
   name: { type: String, required: true },
   task: { type: String, required: true },
-  usuario: {type: Schema.Types.ObjectId, ref: "users"}
+  usuario: { type: Schema.Types.ObjectId, ref: "users", default: null },
 });
 
 export const TaskSchema = model<Tasks>("tasks", schema);

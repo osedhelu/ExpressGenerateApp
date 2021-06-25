@@ -22,16 +22,18 @@ export class taskController {
       };
     }
   }
-  async list(): Promise<MessageResponse> {
+  async list(id: any): Promise<MessageResponse> {
+    console.log(id);
     try {
       return {
         ok: true,
-        data: await TaskSchema.find(),
+        data: await TaskSchema.find({ usuario: id }),
       };
     } catch (err) {
       return {
         ok: false,
         message: "Error al listar las tarea",
+        data: []
       };
     }
   }

@@ -6,8 +6,8 @@ const model = new taskController();
 export const router: Router = Router();
 
 // Define your routes here
-router.get("/", async (req, res) => {
-  const data = await model.list();
+router.get("/:id", async (req, res) => {
+  const data = await model.list(req.params.id);
   r._200(res, data);
 });
 
